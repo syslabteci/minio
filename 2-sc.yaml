@@ -1,0 +1,104 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: sc-minio
+provisioner: kubernetes.io/no-provisioner
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-minio-01
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 30Gi
+  hostPath:
+    path: /var/data/minio1
+    type: ''
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - lkc
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: sc-minio
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-minio-02
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 30Gi
+  hostPath:
+    path: /var/data/minio2
+    type: ''
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - lkc
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: sc-minio
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-minio-03
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 30Gi
+  hostPath:
+    path: /var/data/minio3
+    type: ''
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - lkc
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: sc-minio
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-minio-04
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 30Gi
+  hostPath:
+    path: /var/data/minio4
+    type: ''
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - lkc
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: sc-minio
+  volumeMode: Filesystem
